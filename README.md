@@ -19,6 +19,155 @@ Version Control:
 
 * **Fork** can create an entire copy of your Original Source
 
+# 🧩 Git Concepts and Configuration Guide
+
+## ① Working Directory
+This is your current project folder where you create and modify files.
+
+### Example files:
+- index.html
+- index2.html
+
+You edit files here before tracking them with Git.
+
+---
+
+## ② Staging Area (Index)
+A temporary space where Git keeps track of files you intend to commit.
+
+### Command to add files:
+```bash
+git add index.html
+git add .
+```
+It means: “Hey Git, I’m ready to save these changes!”
+
+---
+
+## ③ Local Repository (.git folder)
+Located inside your project folder.
+
+It stores committed versions of your files as snapshots.
+
+### You create it with:
+```bash
+git init
+```
+Each commit is like a “save point” that you can revert to.
+
+---
+
+## 🔁 Flow Summary:
+1. Create/modify files → **Working directory**
+2. Stage files → `git add` → **Staging area**
+3. Commit files → `git commit -m "message"` → **Local repository**
+
+---
+
+## 🧭 Git Configuration Levels
+Git allows configuration at three levels — **system**, **global**, and **local**.
+
+| Configuration Type | Location | Applies To | File |
+|--------------------|-----------|-------------|------|
+| System | Entire system (all users) | Every user & repo on that server | `/etc/gitconfig` |
+| Global | Current user | All repos for that user | `~/.gitconfig` |
+| Local | Current repository only | That one project | `<repo>/.git/config` |
+
+---
+
+## 🔧 Commands to Configure Git
+
+### 1️⃣ System Configuration
+```bash
+sudo git config --system user.name "Raviteja"
+sudo git config --system user.email "raviteja@example.com"
+```
+Affects all repositories and users on the system.  
+Stored in `/etc/gitconfig`.
+
+---
+
+### 2️⃣ Global Configuration
+```bash
+git config --global user.name "Raviteja"
+git config --global user.email "raviteja@example.com"
+```
+Applies to all repositories for your user account.  
+Stored in `~/.gitconfig`.
+
+To open or edit directly:
+```bash
+vim ~/.gitconfig
+```
+
+---
+
+### 3️⃣ Local Configuration
+```bash
+git config --local user.name "Raviteja"
+git config --local user.email "raviteja@example.com"
+```
+Applies only to the current repository.  
+Stored in `.git/config` inside your repo folder.
+
+---
+
+## 🕵️ View Your Configuration
+```bash
+git config --list --show-origin
+```
+Displays where each setting comes from (system, global, or local).
+
+---
+
+## 🧮 Useful Git Commands
+
+| Command | Description |
+|----------|-------------|
+| `git init` | Initializes a new Git repo |
+| `git add <file>` | Adds file to staging area |
+| `git commit -m "message"` | Saves staged files to local repo |
+| `git status` | Shows tracked/untracked file status |
+| `git ls-files` | Lists all files currently tracked by Git |
+| `git log` | Shows commit history |
+| `git config --list` | Shows configuration settings |
+
+---
+
+## 🗂 File Paths Recap
+
+| File | Description |
+|------|--------------|
+| `/etc/gitconfig` | System-wide configuration |
+| `~/.gitconfig` | User-level (global) configuration |
+| `.git/config` | Repository-level (local) configuration |
+
+---
+
+## ✅ Quick Example
+Here’s how a setup might look on your AWS EC2 Ubuntu server:
+
+```bash
+# Step 1: Initialize repo
+git init
+
+# Step 2: Set user details for this repo (local)
+git config --local user.name "Raviteja"
+git config --local user.email "raviteja@ec2.com"
+
+# Step 3: Add files
+git add index.html
+
+# Step 4: Commit snapshot
+git commit -m "First commit"
+
+# Step 5: List tracked files
+git ls-files
+```
+
+
+
+
 # installation & configuration
 
 ```console
