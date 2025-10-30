@@ -381,7 +381,7 @@ echo ".env" >> .gitignore
 
 ---
 
-## 1️⃣ `git revert <commit-id>`
+## 8️⃣ `git revert <commit-id>`
 
 ### 🔍 Definition
 `git revert` creates a **new commit** that undoes the changes introduced by a specific commit — without modifying history.
@@ -422,7 +422,7 @@ git revert HEAD~3..HEAD
 
 ---
 
-## 2️⃣ `git reset --soft <commit-id>`
+## 9️⃣ `git reset --soft <commit-id>`
 
 ### 🔍 Definition
 `git reset --soft` moves `HEAD` to a previous commit but **keeps all your changes staged** (in the index).
