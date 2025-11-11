@@ -462,7 +462,7 @@ git commit -m "Squashed last two commits"
 
 ---
 
-## 3️⃣ `git reset --hard <commit-id>`
+## 🔟 `git reset --hard <commit-id>`
 
 ### 🔍 Definition
 `git reset --hard` resets the `HEAD`, **index**, and **working directory** to a specific commit.
