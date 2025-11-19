@@ -583,7 +583,194 @@ git status
 ```
 
 
+# Git Branching, Merging, Rebase, Cherry-Pick & Recovery
 
-## To Visualize the Git
+## 1. Viewing and Creating Branches
+### List local branches
+```bash
+git branch
+```
+
+### List all branches (local + remote)
+```bash
+git branch -a
+```
+
+### Create a new branch
+```bash
+git branch feature
+```
+
+### Switch to a branch
+```bash
+git checkout feature
+```
+
+### Create & switch in one command
+```bash
+git checkout -b dev
+```
+
+---
+
+## 2. Add Files to Feature Branch
+```bash
+echo "Hello Feature" > feature.txt
+git add feature.txt
+git commit -m "Added feature file"
+```
+
+---
+
+## 3. View Files in a Branch
+```bash
+git ls-tree feature
+git ls-tree -r feature
+```
+
+---
+
+## 4. Switch Back to Master
+```bash
+git checkout master
+```
+
+---
+
+## 5. Merge Feature → Master
+```bash
+git merge feature
+```
+
+---
+
+## 6. Rename a Branch
+```bash
+git branch -m feature prod
+```
+
+---
+
+## 7. Delete Branches
+### Delete merged branch
+```bash
+git branch -d feature
+```
+
+### Force delete unmerged branch
+```bash
+git branch -D dev
+```
+
+---
+
+## 8. Recover Deleted Branch using Reflog
+View reflog:
+```bash
+git reflog
+```
+
+Restore branch:
+```bash
+git branch feature <commit-id>
+```
+
+---
+
+## 9. Cherry-Pick (Apply Specific Commit to Another Branch)
+### Example
+Fix in feature branch:
+```
+feature: A → B → C(FIX) → D
+```
+
+Apply commit C to master:
+```bash
+git checkout master
+git cherry-pick <commit-id>
+```
+
+---
+
+## 10. Rebase (Rewrite Commit History)
+### Scenario
+master:
+```
+A → B → C
+```
+feature:
+```
+A → B → D → E
+```
+
+Rebase:
+```bash
+git checkout feature
+git rebase master
+```
+
+Result:
+```
+A → B → C → D' → E'
+```
+
+---
+
+## 11. Merge vs Rebase (Clear Comparison)
+
+### Merge (Preserves history)
+Creates a merge commit.
+
+### Rebase (Rewrites history)
+Creates linear commit flow.
+
+---
+
+## 12. Git Conflict
+Occurs when same lines change in different branches.
+
+Example conflict:
+```
+<<<<<<< HEAD
+I will call
+=======
+I haven’t called
+>>>>>>> feature
+```
+
+### Resolve:
+1. Edit file  
+2. Remove markers  
+3. Keep correct version  
+4. Save  
+5. Run:
+```bash
+git add <file>
+git merge --continue
+```
+
+---
+
+## 13. Workflow Example
+```
+git checkout -b feature
+git add a.html
+git commit -m "Added A"
+git checkout feature
+git rebase master
+git checkout master
+git merge feature
+git branch -d feature
+git reflog
+git branch feature <commit-id>
+```
+
+
+
+
+
+
+
+# To Visualize the Git
 
 follow this link -   <http://git-school.github.io/visualizing-git/>
