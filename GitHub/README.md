@@ -459,3 +459,129 @@ git remote add origin git@github.com:raviteja1108/myproject01.git
 
 ---
 
+
+# 🚀 Git Fetch + Merge Only One File from Remote
+
+---
+
+## 🔥 1. What `git fetch` Does
+
+`git fetch` downloads changes from the remote repository but **does NOT merge** them automatically.
+
+```bash
+git fetch origin
+```
+
+After this:
+
+```
+origin/master
+origin/dev
+origin/feature-1
+```
+
+These are **remote‑tracking branches** — read‑only references.
+👉 Your **local working directory does NOT change** yet.
+
+---
+
+## 🔥 2. Scenario — Merge ONLY One File From Remote to Local
+
+Suppose:
+
+* You are on **local `master`**
+* Remote (`origin/master`) has an updated file `index.html`
+* You want **only that file**, not the whole branch
+
+---
+
+### ✔ Step 1 — Fetch latest from remote
+
+```bash
+git fetch origin
+```
+
+This updates the remote reference `origin/master`, but **does not affect your local files**.
+
+---
+
+### ✔ Step 2 — Checkout only one file from remote
+
+```bash
+git checkout origin/master -- index.html
+```
+
+This brings only `index.html` from `origin/master` into your working directory.
+
+🔹 No branch switch
+🔹 No merge
+🔹 Only that one file is updated in working directory
+
+⚠️ Note: the file is present but **not yet committed**.
+
+---
+
+### ✔ Step 3 — Stage and commit the file
+
+```bash
+git add index.html
+git commit -m "Merged index.html from origin/master"
+```
+
+This finalizes the one‑file merge into local history.
+
+---
+
+## 🎯 Why Use This Technique?
+
+Useful when:
+
+* You want only **one specific file from remote**
+* You don't want to merge/pull the entire branch
+* You want to **avoid conflicts in unrelated files**
+
+Perfect for:
+✔ Hotfixing
+✔ Updating only documentation
+✔ Syncing selective config files
+
+---
+
+## 🔁 Full Command Sequence
+
+```
+git fetch origin
+git checkout origin/master -- index.html
+git add index.html
+git commit -m "Merged index.html from origin/master"
+```
+
+---
+
+## 📝 More Useful Variations
+
+| Action                            | Command                                                     |
+| --------------------------------- | ----------------------------------------------------------- |
+| Checkout multiple files           | `git checkout origin/master -- index.html style.css app.js` |
+| Checkout a full folder            | `git checkout origin/master -- static/`                     |
+| Checkout file from another branch | `git checkout feature/login -- login.html`                  |
+| Restore file from older commit    | `git checkout <commit-id> -- index.html`                    |
+
+---
+
+### 💡 Tip
+
+To see differences before checkout:
+
+```bash
+git diff origin/master index.html
+```
+
+---
+
+If you'd like, I can also add:
+
+* Version of this method using **`git restore`** (new command)
+* Comparison between **`git fetch` vs `git pull`**
+* A workflow diagram for your documentation
+
