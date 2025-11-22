@@ -314,9 +314,148 @@ git remote add origin https://github.com/raviteja1108/myproject01.git
 
 ---
 
-If you want, I can extend this `.md` with:
-🔹 Troubleshooting (remote already exists / rejection / 403 / cached credentials)
-🔹 HTTPS vs SSH comparison diagram
-🔹 Windows Credential Manager & Git Credential Helper notes
+# 🚀 Password‑less Git Push using SSH Authentication (GitHub)
 
-Just tell me and I’ll update this sheet ✨
+With **SSH authentication**, GitHub does **not** ask for username or Personal Access Token (PAT).
+Your machine authenticates automatically using the **private key stored locally**.
+
+---
+
+## ✅ 1. Add Remote Repository Using SSH URL
+
+Instead of HTTPS, use SSH:
+
+```bash
+git remote add origin git@github.com:raviteja1108/myproject01.git
+```
+
+Verify:
+
+```bash
+git remote -v
+```
+
+Output:
+
+```
+origin  git@github.com:raviteja1108/myproject01.git (fetch)
+origin  git@github.com:raviteja1108/myproject01.git (push)
+```
+
+---
+
+## ✅ 2. Generate SSH Key Pair
+
+Run on EC2 / local machine:
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "raviteja@example.com"
+```
+
+When asked:
+
+```
+Enter file in which to save the key (~/.ssh/id_rsa):
+```
+
+➡ Press **Enter** (default path)
+
+Next prompt:
+
+```
+Enter passphrase:
+```
+
+➡ Press **Enter** (empty) → **password‑less access**
+
+Keys generated:
+
+```
+Private key → ~/.ssh/id_rsa
+Public key  → ~/.ssh/id_rsa.pub
+```
+
+🔴 **Never share the private key**
+
+---
+
+## ✅ 3. Copy Your Public Key
+
+```bash
+cat ~/.ssh/id_rsa.pub
+```
+
+Copy the full output starting with:
+
+```
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC...
+```
+
+---
+
+## ✅ 4. Add SSH Key to GitHub
+
+Go to:
+
+```
+GitHub → Settings → SSH and GPG keys → New SSH Key
+```
+
+* **Title:** EC2 key / Laptop key
+* **Key:** paste the copied public key
+
+🟢 Now GitHub **trusts your machine**.
+
+---
+
+## ✅ 5. Test SSH Connection
+
+Run:
+
+```bash
+ssh -T git@github.com
+```
+
+Expected output:
+
+```
+Hi raviteja1108! You've successfully authenticated, but GitHub does not provide shell access.
+```
+
+➡ Means SSH authentication is working.
+
+---
+
+## ✅ 6. Push Code Password‑less
+
+```bash
+git push -u origin master
+```
+
+From now on:
+
+```bash
+git push
+git pull
+```
+
+👉 No username or password will be asked.
+
+---
+
+## 🔁 Switching from HTTPS to SSH (if wrong remote added earlier)
+
+Remove old remote:
+
+```bash
+git remote rm origin
+```
+
+Add SSH remote:
+
+```bash
+git remote add origin git@github.com:raviteja1108/myproject01.git
+```
+
+---
+
