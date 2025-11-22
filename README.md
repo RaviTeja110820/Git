@@ -766,6 +766,185 @@ git branch feature <commit-id>
 ```
 
 
+# Git Stash
+
+## 1. `git stash`
+Temporarily saves your uncommitted changes and cleans your working directory.
+
+### Scenario
+You are editing `index.html` but need to switch branches quickly:
+
+```
+git stash
+```
+
+- Saves modified files  
+- Removes them from working directory  
+- Does NOT save untracked files
+
+---
+
+## 2. `git stash -u`
+Stashes both tracked and untracked files.
+
+```
+git stash -u
+```
+
+---
+
+## 3. `git stash -a`
+Saves everything including ignored files.
+
+```
+git stash -a
+```
+
+---
+
+## 4. `git stash list`
+Shows all stashes.
+
+```
+git stash list
+```
+
+---
+
+## 5. `git show stash@{0}`
+Displays the content stored in the stash.
+
+```
+git show stash@{0}
+```
+
+---
+
+## 6. `git stash pop stash@{1}`
+Applies the stash and removes it.
+
+```
+git stash pop stash@{1}
+```
+
+---
+
+## 7. `git stash apply`
+Applies the stash but keeps it in the list.
+
+```
+git stash apply stash@{0}
+```
+
+---
+
+## 8. `git stash drop stash@{0}`
+Deletes a specific stash.
+
+```
+git stash drop stash@{0}
+```
+
+---
+
+## 9. `git stash clear`
+Clears all stashes.
+
+```
+git stash clear
+```
+
+---
+
+## 10. `git stash -p`
+Interactively stash only selected parts.
+
+```
+git stash -p
+```
+
+---
+
+## 11. `git stash push`
+Stash with a message.
+
+```
+git stash push -m "Work before deployment"
+```
+
+---
+
+## 12. `git stash --keep-index`
+`git stash --keep-index` stashes only **unstaged changes** and keeps **staged changes** in place.
+
+---
+
+## 🔥 Scenario Example
+
+You are working on two files:
+
+```
+index.html   (staged)
+app.js       (unstaged)
+```
+
+### Step 1 — Stage one file
+```
+git add index.html
+```
+
+### Step 2 — Modify another file (unstaged)
+```
+echo "debug code" >> app.js
+```
+
+### Step 3 — Stash only unstaged changes
+```
+git stash --keep-index
+```
+
+### Result:
+- `index.html` → remains staged  
+- `app.js` → stashed and removed from working directory  
+
+### Step 4 — Commit staged file
+```
+git commit -m "Updated index.html"
+```
+
+### Step 5 — Restore stashed changes
+```
+git stash pop
+```
+
+## Real-World Scenario
+You edited files but need to switch branches:
+
+```
+git stash -u
+git checkout master
+git stash pop
+```
+
+---
+
+## Multiple Stash Example
+```
+git stash list
+git stash apply stash@{2}
+```
+
+| Command                  | Purpose                           |
+| ------------------------ | --------------------------------- |
+| `git stash -u`           | Stashed tracked + untracked files |
+| `git stash list`         | View stashes                      |
+| `git stash apply`        | Apply stash without deleting      |
+| `git stash drop`         | Delete specific stash             |
+| `git stash --keep-index` | Stash only unstaged changes       |
+| `git stash pop`          | Apply & delete stash              |
+| `git stash -p`           | Selectively stash hunks           |
+| `git show stash@{0}`     | Inspect stash contents            |
+| `git stash clear`        | Remove all stashes                |
 
 
 
