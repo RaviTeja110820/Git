@@ -585,3 +585,55 @@ If you'd like, I can also add:
 * Comparison between **`git fetch` vs `git pull`**
 * A workflow diagram for your documentation
 
+
+# GitHub Organization
+
+## What Is a GitHub Organization?
+
+A GitHub Organization is a shared workspace where multiple people can
+collaborate on repositories with controlled access and permissions.
+
+## Key Features
+
+-   Centralized repository management
+-   Team-based permissions
+-   Enhanced security and audit logs
+
+## How to Create an Organization
+
+1.  Go to GitHub Settings → Organizations → New Organization.
+2.  Choose the plan (Free/Team/Enterprise).
+3.  Provide an organization name.
+4.  Complete setup.
+
+## Add Members
+
+Navigate to: Organization → People → Invite Member.
+
+## Roles
+
+-   **Owner**: Full administrative control.
+-   **Member**: Standard permissions.
+
+## Teams & Permissions
+
+  Team          Permission   Description
+  ------------- ------------ --------------------
+  dev-team      Write        Developer commits
+  qa-team       Read         Testing only
+  devops-team   Maintain     CI/CD & operations
+  admin-team    Admin        Manage settings
+
+## Create Repositories in an Organization
+
+When creating a repo, choose your organization as the **Owner**.
+
+## SSH/HTTPS Access
+
+HTTPS:
+
+    https://github.com/org-name/repo.git
+
+SSH:
+
+    git@github.com:org-name/repo.git
