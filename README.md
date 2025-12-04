@@ -948,6 +948,92 @@ git stash apply stash@{2}
 
 
 
+# 🏷️ Git Tag
+
+## 1️⃣ Create a Lightweight Tag
+
+    git tag module1
+
+Creates a simple tag `module1` without metadata.
+
+List tags:
+
+    git tag
+
+Show tag details:
+
+    git show module1
+
+------------------------------------------------------------------------
+
+## 2️⃣ Create an Annotated Tag
+
+    git tag -a v1.0 -m "version 1.0 release"
+
+Stores author, date, and message.
+
+Show:
+
+    git show v1.0
+
+------------------------------------------------------------------------
+
+## 3️⃣ Tag an Older Commit
+
+    git tag -a v0.1 4242fa0 -m "version HTML release"
+
+Tags the commit with hash `4242fa0`.
+
+------------------------------------------------------------------------
+
+## 4️⃣ Push Tags to Remote
+
+Push one tag:
+
+    git push origin v0.1
+
+Push all tags:
+
+    git push origin --tags
+
+------------------------------------------------------------------------
+
+## 5️⃣ Create a Branch from a Tag
+
+    git checkout -b branch_v0.1 v0.1
+
+Creates branch `branch_v0.1` starting from tag `v0.1`.
+
+------------------------------------------------------------------------
+
+## 6️⃣ Delete Tags
+
+Delete locally:
+
+    git tag -d module1
+
+Delete on remote:
+
+    git push origin --delete module1
+
+------------------------------------------------------------------------
+
+# ✔ Summary Table
+
+| Action                 | Command                                             |
+|------------------------|-----------------------------------------------------|
+| Create lightweight tag | `git tag module1`                                   |
+| Create annotated tag   | `git tag -a v1.0 -m "version 1.0 release"`          |
+| Tag old commit         | `git tag -a v0.1 4242fa0 -m "version HTML release"` |
+| Show tag               | `git show module1`                                  |
+| Push tag               | `git push origin v0.1`                              |
+| Push all tags          | `git push origin --tags`                            |
+| Branch from tag        | `git checkout -b branch_v0.1 v0.1`                  |
+| Delete tag             | `git tag -d module1`                                |
+
+
+
+
 
 
 # To Visualize the Git
