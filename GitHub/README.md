@@ -626,7 +626,7 @@ Navigate to: Organization → People → Invite Member.
 
 ## Create Repositories in an Organization
 
-When creating a repo, choose your organization as the **Owner**.
+When creating a repo, choose your organization as the **Owner**
 
 ## SSH/HTTPS Access
 
